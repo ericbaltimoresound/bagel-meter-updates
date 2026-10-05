@@ -1,0 +1,20 @@
+<?xml version="1.0" standalone="yes"?>
+<rss xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle" version="2.0">
+    <channel>
+        <title>Bagel Meter</title>
+        <item>
+            <title>1.2</title>
+            <pubDate>Mon, 05 Oct 2026 16:43:45 -0400</pubDate>
+            <sparkle:version>3</sparkle:version>
+            <sparkle:shortVersionString>1.2</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
+            <description sparkle:format="markdown"><![CDATA[# Bagel Meter 1.2
+
+- Bagel Meter now updates itself. It checks once a day and asks before installing. You can also click **Check for updates** at the bottom.
+- The Friends tab follows the **Compact** checkbox: one small table per friend, one row per account.
+- Friends' accounts show their email and an icon you can pick.
+]]></description>
+            <enclosure url="https://ericbaltimoresound.github.io/bagel-meter-updates/BagelMeter-1.2.zip" length="1985015" type="application/octet-stream" sparkle:edSignature="fnV39Q0CJhhzkfTLFsb3CMbSCGTnOGBvETDjQxJNMVCJaC9cre5TgTV22MMZueeXNxVqEbSlKXGr1aF8AbtVBA=="/>
+        </item>
+    </channel>
+</rss>
