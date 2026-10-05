@@ -22,7 +22,7 @@ param(
 $ErrorActionPreference = 'Stop'
 try { [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12 } catch { }
 
-$Version  = '1.3'
+$Version  = '1.3.3'
 $TaskName = 'Bagel Meter Share'
 $HomeDir  = [Environment]::GetFolderPath('UserProfile')
 if ($env:BAGEL_HOME) { $HomeDir = $env:BAGEL_HOME }
@@ -208,14 +208,31 @@ function Parse-CodexLimits($body) {
 
 # ---------- reading each account ----------
 
+function Get-ClaudeEmail([string]$dir) {
+    $files = @((Join-Path $dir '.claude.json'))
+    if ($dir -eq (Join-Path $HomeDir '.claude')) { $files = @((Join-Path $HomeDir '.claude.json')) + $files }
+    foreach ($f in $files) {
+        $email = Get-Prop (Get-Prop (Read-JsonFile $f) 'oauthAccount') 'emailAddress'
+        if ($email) { return $email }
+    }
+    return $null
+}
+
 function Get-ClaudeAccount([string]$dir) {
     $file = Join-Path $dir '.credentials.json'
     $creds = Read-JsonFile $file
     $oauth = Get-Prop $creds 'claudeAiOauth'
-    if (-not $oauth -or -not (Get-Prop $oauth 'accessToken')) { return $null }
+    if (-not $oauth -or -not (Get-Prop $oauth 'accessToken')) {
+        # Signed in only through the Claude desktop app. Its login can't (and shouldn't) be read,
+        # but which account it is and when it was last used here can, so My devices still shows it.
+        $email = Get-ClaudeEmail $dir
+        if ($email -or (Last-Used $dir 'projects')) {
+            return [ordered]@{ plan = 'Claude app'; error = $null; limits = (New-Object System.Collections.ArrayList); email = $email }
+        }
+        return $null
+    }
     $result = [ordered]@{ plan = (Pretty-Plan (Get-Prop $oauth 'subscriptionType')); error = $null; limits = (New-Object System.Collections.ArrayList); email = $null }
-    if ($dir -eq (Join-Path $HomeDir '.claude')) { $profileFile = Join-Path $HomeDir '.claude.json' } else { $profileFile = Join-Path $dir '.claude.json' }
-    $result.email = Get-Prop (Get-Prop (Read-JsonFile $profileFile) 'oauthAccount') 'emailAddress'
+    $result.email = Get-ClaudeEmail $dir
 
     $expires = [double](Get-Prop $oauth 'expiresAt')
     $nowMs = (Now-Seconds) * 1000
