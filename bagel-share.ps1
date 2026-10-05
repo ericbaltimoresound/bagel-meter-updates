@@ -22,7 +22,7 @@ param(
 $ErrorActionPreference = 'Stop'
 try { [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12 } catch { }
 
-$Version  = '1.1'
+$Version  = '1.3'
 $TaskName = 'Bagel Meter Share'
 $HomeDir  = [Environment]::GetFolderPath('UserProfile')
 if ($env:BAGEL_HOME) { $HomeDir = $env:BAGEL_HOME }
@@ -299,23 +299,40 @@ function Get-AccountFolders([string]$stem) {
     return ,$found
 }
 
+# When this account was last used on this PC: the newest session log, rounded to 5 minutes.
+# Claude Code writes <folder>\projects\...\*.jsonl, Codex writes <folder>\sessions\...\*.jsonl.
+function Last-Used([string]$dir, [string]$sub) {
+    $root = Join-Path $dir $sub
+    if (-not (Test-Path $root)) { return $null }
+    $f = Get-ChildItem -Path $root -Recurse -File -Filter '*.jsonl' -ErrorAction SilentlyContinue |
+        Sort-Object LastWriteTimeUtc -Descending | Select-Object -First 1
+    if (-not $f) { return $null }
+    $t = [double]([DateTimeOffset]$f.LastWriteTimeUtc).ToUnixTimeSeconds()
+    return [Math]::Floor($t / 300) * 300
+}
+
 function Build-Snapshot([string]$name, [bool]$hideEmails) {
     $accounts = New-Object System.Collections.ArrayList
+    # "Open now" can only be told apart per account when there's one folder for that tool.
+    $claudeDirs = Get-AccountFolders '.claude'
+    $claudeOpen = $null; if ($claudeDirs.Count -eq 1) { $claudeOpen = [bool](Is-Running 'claude') }
     $n = 0
-    foreach ($dir in (Get-AccountFolders '.claude')) {
+    foreach ($dir in $claudeDirs) {
         $a = Get-ClaudeAccount $dir
         if ($null -eq $a) { continue }
         $n++
         $email = $a.email; if ($hideEmails) { $email = $null }
-        [void]$accounts.Add([ordered]@{ id = 'win-claude-' + (Split-Path $dir -Leaf); provider = 'claude'; title = 'Claude ' + $n; plan = $a.plan; error = $a.error; limits = $a.limits; email = $email })
+        [void]$accounts.Add([ordered]@{ id = 'win-claude-' + (Split-Path $dir -Leaf); provider = 'claude'; title = 'Claude ' + $n; plan = $a.plan; error = $a.error; limits = $a.limits; email = $email; openNow = $claudeOpen; lastUsed = (Last-Used $dir 'projects') })
     }
+    $codexDirs = Get-AccountFolders '.codex'
+    $codexOpen = $null; if ($codexDirs.Count -eq 1) { $codexOpen = [bool](Is-Running 'codex') }
     $n = 0
-    foreach ($dir in (Get-AccountFolders '.codex')) {
+    foreach ($dir in $codexDirs) {
         $a = Get-CodexAccount $dir
         if ($null -eq $a) { continue }
         $n++
         $email = $a.email; if ($hideEmails) { $email = $null }
-        [void]$accounts.Add([ordered]@{ id = 'win-codex-' + (Split-Path $dir -Leaf); provider = 'codex'; title = 'Codex ' + $n; plan = $a.plan; error = $a.error; limits = $a.limits; email = $email })
+        [void]$accounts.Add([ordered]@{ id = 'win-codex-' + (Split-Path $dir -Leaf); provider = 'codex'; title = 'Codex ' + $n; plan = $a.plan; error = $a.error; limits = $a.limits; email = $email; openNow = $codexOpen; lastUsed = (Last-Used $dir 'sessions') })
     }
     return [ordered]@{ v = 1; name = $name; sentAt = 0; accounts = $accounts }
 }
