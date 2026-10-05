@@ -22,7 +22,7 @@ param(
 $ErrorActionPreference = 'Stop'
 try { [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12 } catch { }
 
-$Version  = '1.3.3'
+$Version  = '1.3.4'
 $TaskName = 'Bagel Meter Share'
 $HomeDir  = [Environment]::GetFolderPath('UserProfile')
 if ($env:BAGEL_HOME) { $HomeDir = $env:BAGEL_HOME }
@@ -208,14 +208,20 @@ function Parse-CodexLimits($body) {
 
 # ---------- reading each account ----------
 
+# Which account Claude Code on this PC is signed in as. The command-line tool keeps it in
+# %USERPROFILE%\.claude.json, the Claude desktop app in .claude\.claude.json; an old copy of
+# one can linger after switching accounts, so the most recently changed file wins.
 function Get-ClaudeEmail([string]$dir) {
     $files = @((Join-Path $dir '.claude.json'))
-    if ($dir -eq (Join-Path $HomeDir '.claude')) { $files = @((Join-Path $HomeDir '.claude.json')) + $files }
+    if ($dir -eq (Join-Path $HomeDir '.claude')) { $files += (Join-Path $HomeDir '.claude.json') }
+    $best = $null; $bestTime = [DateTime]::MinValue
     foreach ($f in $files) {
+        if (-not (Test-Path $f)) { continue }
         $email = Get-Prop (Get-Prop (Read-JsonFile $f) 'oauthAccount') 'emailAddress'
-        if ($email) { return $email }
+        $time = (Get-Item -Force $f).LastWriteTimeUtc
+        if ($email -and $time -gt $bestTime) { $best = $email; $bestTime = $time }
     }
-    return $null
+    return $best
 }
 
 function Get-ClaudeAccount([string]$dir) {
