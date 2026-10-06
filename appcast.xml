@@ -3,6 +3,23 @@
     <channel>
         <title>Bagel Meter</title>
         <item>
+            <title>1.5</title>
+            <pubDate>Tue, 06 Oct 2026 02:41:48 -0400</pubDate>
+            <sparkle:version>9</sparkle:version>
+            <sparkle:shortVersionString>1.5</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
+            <description sparkle:format="markdown"><![CDATA[# Bagel Meter 1.5
+
+- **Connect iPhone** on My devices: shows a QR code for the Bagel Meter iPhone app, which then shows what this Mac sees (your accounts, friends and computers). Your Mac sends it encrypted every 10 minutes while it's awake. No logins ever leave the Mac.
+]]></description>
+            <enclosure url="https://ericbaltimoresound.github.io/bagel-meter-updates/BagelMeter-1.5.zip" length="2289460" type="application/octet-stream" sparkle:edSignature="C/k7TsdJvmksfGwUDbZK6fWWGz6uhn3CN/8rQFtxiuYd6AGyL20F4NZTfp2zfiVIRfQR0qSAn8LUmWyuAVDqBA=="/>
+            <sparkle:deltas>
+                <enclosure url="https://ericbaltimoresound.github.io/bagel-meter-updates/Bagel%20Meter9-8.delta" sparkle:deltaFrom="8" length="256118" type="application/octet-stream" sparkle:deltaFromSparkleExecutableSize="977808" sparkle:deltaFromSparkleLocales="de,he,ar,el,ja,fa,uk" sparkle:edSignature="/xtWx0kGOGib6NrhYLsfru56Xn5r3WXygEY0LUEkXVkUW9hGfDV0XMYsE4GXEnt0kyjKytjct0JY/a6ek2uhDw=="/>
+                <enclosure url="https://ericbaltimoresound.github.io/bagel-meter-updates/Bagel%20Meter9-7.delta" sparkle:deltaFrom="7" length="334482" type="application/octet-stream" sparkle:deltaFromSparkleExecutableSize="977808" sparkle:deltaFromSparkleLocales="de,he,ar,el,ja,fa,uk" sparkle:edSignature="bNfefdodwJ94uM8J+0AGsUrHQY0SN71B8dNAMqpHjC2n/X0hOzxJyw4Fq/BoUkQOyZi/xqsdhrIopZhB0sKjCg=="/>
+                <enclosure url="https://ericbaltimoresound.github.io/bagel-meter-updates/Bagel%20Meter9-6.delta" sparkle:deltaFrom="6" length="392922" type="application/octet-stream" sparkle:deltaFromSparkleExecutableSize="977808" sparkle:deltaFromSparkleLocales="de,he,ar,el,ja,fa,uk" sparkle:edSignature="VSGB4hZLHUED1uHl6n+do8VAUxRlCpw1bRbDQfNuCom1xQeL2yjAuUjF1Zjbpfb1voTMp4dEqzfWdzT+rWKcBQ=="/>
+            </sparkle:deltas>
+        </item>
+        <item>
             <title>1.4</title>
             <pubDate>Mon, 05 Oct 2026 20:38:03 -0400</pubDate>
             <sparkle:version>8</sparkle:version>
@@ -38,24 +55,6 @@
                 <enclosure url="https://ericbaltimoresound.github.io/bagel-meter-updates/Bagel%20Meter7-6.delta" sparkle:deltaFrom="6" length="234906" type="application/octet-stream" sparkle:deltaFromSparkleExecutableSize="977808" sparkle:deltaFromSparkleLocales="de,he,ar,el,ja,fa,uk" sparkle:edSignature="bJX5zOc9h6514v2CTjB+NJa/8b1zWL9oXVwhkBJ2R9OIChjIONJeYnbdeeIzFnxTCYpAraCxhZ1WpP8pOzwnCA=="/>
                 <enclosure url="https://ericbaltimoresound.github.io/bagel-meter-updates/Bagel%20Meter7-5.delta" sparkle:deltaFrom="5" length="252358" type="application/octet-stream" sparkle:deltaFromSparkleExecutableSize="977808" sparkle:deltaFromSparkleLocales="de,he,ar,el,ja,fa,uk" sparkle:edSignature="NQazYoDRPDG9BojbWmzBZ11mRi4WVyJpo3rV1EjcSpDrChVpATmoDBvLAazYF8/YJq6GKh7vVVmNw2ewosJDDQ=="/>
                 <enclosure url="https://ericbaltimoresound.github.io/bagel-meter-updates/Bagel%20Meter7-4.delta" sparkle:deltaFrom="4" length="274050" type="application/octet-stream" sparkle:deltaFromSparkleExecutableSize="977808" sparkle:deltaFromSparkleLocales="de,he,ar,el,ja,fa,uk" sparkle:edSignature="DF85PNKJn0P4ueFefJY+ZdCC2eClYGK6pwSXjQRSvjhlvJ87wcEf6AAX9U55yTCvoxJ9vakVCYgVGsiWUI4DBQ=="/>
-            </sparkle:deltas>
-        </item>
-        <item>
-            <title>1.3.2</title>
-            <pubDate>Mon, 05 Oct 2026 18:24:40 -0400</pubDate>
-            <sparkle:version>6</sparkle:version>
-            <sparkle:shortVersionString>1.3.2</sparkle:shortVersionString>
-            <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
-            <description sparkle:format="markdown"><![CDATA[# Bagel Meter 1.3.2
-
-- My devices is laid out like Accounts: this Mac on the left, your other computers on the right, in both Regular and Compact.
-- Shorter, cleaner status on each account: "Open now", "26m ago", "Signed out", "Not used here".
-]]></description>
-            <enclosure url="https://ericbaltimoresound.github.io/bagel-meter-updates/BagelMeter-1.3.2.zip" length="2140040" type="application/octet-stream" sparkle:edSignature="GN5NDanjqxhdOCoJwliNgwCzSgWajwPdlzdP+v+GG2YApDMgXvG8qtcsfxTJqc8IARslTUd3YUTz8eXFHt6zBQ=="/>
-            <sparkle:deltas>
-                <enclosure url="https://ericbaltimoresound.github.io/bagel-meter-updates/Bagel%20Meter6-5.delta" sparkle:deltaFrom="5" length="142454" type="application/octet-stream" sparkle:deltaFromSparkleExecutableSize="977808" sparkle:deltaFromSparkleLocales="de,he,ar,el,ja,fa,uk" sparkle:edSignature="pt+BC3J2NxMIeMf9580vGXLG3Rsv64JcAUT/IKdZzxbhnnF+GZC5s2uZUfNz3CC+9ySma6jdr3kUjsoMyWSBAA=="/>
-                <enclosure url="https://ericbaltimoresound.github.io/bagel-meter-updates/Bagel%20Meter6-4.delta" sparkle:deltaFrom="4" length="179942" type="application/octet-stream" sparkle:deltaFromSparkleExecutableSize="977808" sparkle:deltaFromSparkleLocales="de,he,ar,el,ja,fa,uk" sparkle:edSignature="/ZAxhX/8t3sD2AI4r6rpc94au/oEsBxcrfuIDpDvtW8/AY/f9nBvWiNdexXP+LCDeHiPMynyM/+zqq85fQcjCw=="/>
-                <enclosure url="https://ericbaltimoresound.github.io/bagel-meter-updates/Bagel%20Meter6-3.delta" sparkle:deltaFrom="3" length="371778" type="application/octet-stream" sparkle:deltaFromSparkleExecutableSize="977808" sparkle:deltaFromSparkleLocales="de,he,ar,el,ja,fa,uk" sparkle:edSignature="lrWyPzLcKrW66uZuMArKDPlB9kfhWCiY2s2lxY/wuOYlarE0vWdda/qmRECH82Ynzc2w3eWTo5KUoa//u5tNCQ=="/>
             </sparkle:deltas>
         </item>
     </channel>
