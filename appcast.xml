@@ -3,6 +3,25 @@
     <channel>
         <title>Bagel Meter</title>
         <item>
+            <title>1.5.2</title>
+            <pubDate>Tue, 06 Oct 2026 13:46:22 -0400</pubDate>
+            <sparkle:version>11</sparkle:version>
+            <sparkle:shortVersionString>1.5.2</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
+            <description sparkle:format="markdown"><![CDATA[# Bagel Meter 1.5.2
+
+- Friends fold up to one line each, with a little meter per account showing how much room they have left. Click a name to open the full table again, or use Open all / Fold all.
+- Drag friends up and down to put them in the order you want.
+- The checkboxes at the bottom (Launch at login, Hide 5-hour, Include my account emails) now work when you click the box itself, not just the words.
+]]></description>
+            <enclosure url="https://ericbaltimoresound.github.io/bagel-meter-updates/BagelMeter-1.5.2.zip" length="2388125" type="application/octet-stream" sparkle:edSignature="urhScH1eWb96D+bEFblc9jGT+Ef7WQOvD1giakJUaJWJ1VB0Fe3PwMmrTm9dUFRxlzIdMw4JKviI45tTfDyJDw=="/>
+            <sparkle:deltas>
+                <enclosure url="https://ericbaltimoresound.github.io/bagel-meter-updates/Bagel%20Meter11-10.delta" sparkle:deltaFrom="10" length="335210" type="application/octet-stream" sparkle:deltaFromSparkleExecutableSize="977808" sparkle:deltaFromSparkleLocales="de,he,ar,el,ja,fa,uk" sparkle:edSignature="uHP1Dhh5m481z3MUakfPAkGghnLlF3z7GFp3xUsr7tin88lfFVQeKiu3yCrNhQ0M9v14RIoh7VHVOF0GVrnHDQ=="/>
+                <enclosure url="https://ericbaltimoresound.github.io/bagel-meter-updates/Bagel%20Meter11-9.delta" sparkle:deltaFrom="9" length="345690" type="application/octet-stream" sparkle:deltaFromSparkleExecutableSize="977808" sparkle:deltaFromSparkleLocales="de,he,ar,el,ja,fa,uk" sparkle:edSignature="NnWF5pUo/mbz7mOuJ6Rs+dER4FVrGi+ri8wTKUc/ilBO7hcBzEeQwAy+wpUKikJjEB2AmgwKnnQLHc1q5PUzDg=="/>
+                <enclosure url="https://ericbaltimoresound.github.io/bagel-meter-updates/Bagel%20Meter11-8.delta" sparkle:deltaFrom="8" length="411526" type="application/octet-stream" sparkle:deltaFromSparkleExecutableSize="977808" sparkle:deltaFromSparkleLocales="de,he,ar,el,ja,fa,uk" sparkle:edSignature="yDLWpAHkWM6tav2O/3eNGO1D4opdyHpTpQ5uGZjmi8WTCZ1/WjbW5yNcabxIwjFeAO6AC66C94Itq2X6Kx1kBA=="/>
+            </sparkle:deltas>
+        </item>
+        <item>
             <title>1.5.1</title>
             <pubDate>Tue, 06 Oct 2026 12:51:17 -0400</pubDate>
             <sparkle:version>10</sparkle:version>
@@ -35,24 +54,6 @@
                 <enclosure url="https://ericbaltimoresound.github.io/bagel-meter-updates/Bagel%20Meter9-8.delta" sparkle:deltaFrom="8" length="256118" type="application/octet-stream" sparkle:deltaFromSparkleExecutableSize="977808" sparkle:deltaFromSparkleLocales="de,he,ar,el,ja,fa,uk" sparkle:edSignature="/xtWx0kGOGib6NrhYLsfru56Xn5r3WXygEY0LUEkXVkUW9hGfDV0XMYsE4GXEnt0kyjKytjct0JY/a6ek2uhDw=="/>
                 <enclosure url="https://ericbaltimoresound.github.io/bagel-meter-updates/Bagel%20Meter9-7.delta" sparkle:deltaFrom="7" length="334482" type="application/octet-stream" sparkle:deltaFromSparkleExecutableSize="977808" sparkle:deltaFromSparkleLocales="de,he,ar,el,ja,fa,uk" sparkle:edSignature="bNfefdodwJ94uM8J+0AGsUrHQY0SN71B8dNAMqpHjC2n/X0hOzxJyw4Fq/BoUkQOyZi/xqsdhrIopZhB0sKjCg=="/>
                 <enclosure url="https://ericbaltimoresound.github.io/bagel-meter-updates/Bagel%20Meter9-6.delta" sparkle:deltaFrom="6" length="392922" type="application/octet-stream" sparkle:deltaFromSparkleExecutableSize="977808" sparkle:deltaFromSparkleLocales="de,he,ar,el,ja,fa,uk" sparkle:edSignature="VSGB4hZLHUED1uHl6n+do8VAUxRlCpw1bRbDQfNuCom1xQeL2yjAuUjF1Zjbpfb1voTMp4dEqzfWdzT+rWKcBQ=="/>
-            </sparkle:deltas>
-        </item>
-        <item>
-            <title>1.4</title>
-            <pubDate>Mon, 05 Oct 2026 20:38:03 -0400</pubDate>
-            <sparkle:version>8</sparkle:version>
-            <sparkle:shortVersionString>1.4</sparkle:shortVersionString>
-            <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
-            <description sparkle:format="markdown"><![CDATA[# Bagel Meter 1.4
-
-- New **Grouped** view: all your accounts in one list, sorted into Ready (most room first), On credits, and Zeroed (soonest back first). One line per account.
-- The Compact checkbox is now a **View** menu at the bottom: Regular, Compact or Grouped. Your choice is saved on your Mac, so everyone picks their own.
-]]></description>
-            <enclosure url="https://ericbaltimoresound.github.io/bagel-meter-updates/BagelMeter-1.4.zip" length="2233200" type="application/octet-stream" sparkle:edSignature="Eqh6d3E8kMRrhqYxYOpmO+Zd1nEQcJUs1U66oHSNaxdD2smxPRFruVqA8eR+MsDgq9OsgZGAckYJQsGY76OkBw=="/>
-            <sparkle:deltas>
-                <enclosure url="https://ericbaltimoresound.github.io/bagel-meter-updates/Bagel%20Meter8-7.delta" sparkle:deltaFrom="7" length="257722" type="application/octet-stream" sparkle:deltaFromSparkleExecutableSize="977808" sparkle:deltaFromSparkleLocales="de,he,ar,el,ja,fa,uk" sparkle:edSignature="UEfaU92zdR9lKP/nH5nT56XWxGSaSb41L6hF9JZZUWG1Kv/sNJMjXYvIJ0+RCIOFsAvilvHmMbBgxbye4Pq5Bw=="/>
-                <enclosure url="https://ericbaltimoresound.github.io/bagel-meter-updates/Bagel%20Meter8-6.delta" sparkle:deltaFrom="6" length="325954" type="application/octet-stream" sparkle:deltaFromSparkleExecutableSize="977808" sparkle:deltaFromSparkleLocales="de,he,ar,el,ja,fa,uk" sparkle:edSignature="mAftfPxpyYTo0BKddvU4Wm/jQS7ymW5J97hxgjgG3fjjMtptcUfwADKQyKiZpKqs/FQOO7X1OK+Xp4rK8iedAA=="/>
-                <enclosure url="https://ericbaltimoresound.github.io/bagel-meter-updates/Bagel%20Meter8-5.delta" sparkle:deltaFrom="5" length="338778" type="application/octet-stream" sparkle:deltaFromSparkleExecutableSize="977808" sparkle:deltaFromSparkleLocales="de,he,ar,el,ja,fa,uk" sparkle:edSignature="wcpWdoCAjmXzYEWKIdvkiPaB/7kx/rVg1DWVu5wIfY73so3pwi0GD2lsVIv2/T8BfgwdmxZ9MZGr87N1G+27BQ=="/>
             </sparkle:deltas>
         </item>
     </channel>
