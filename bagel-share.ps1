@@ -22,7 +22,7 @@ param(
 $ErrorActionPreference = 'Stop'
 try { [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12 } catch { }
 
-$Version  = '1.3.4'
+$Version  = '1.5.1'
 $TaskName = 'Bagel Meter Share'
 $HomeDir  = [Environment]::GetFolderPath('UserProfile')
 if ($env:BAGEL_HOME) { $HomeDir = $env:BAGEL_HOME }
@@ -395,6 +395,11 @@ function Send-Usage([switch]$Force, [switch]$Loud) {
             if ($a.error) { $line += ': ' + $a.error }
             foreach ($l in $a.limits) { $line += '  ' + $l.label + ' ' + [int][Math]::Round(100 - $l.used) + '% left' }
             Write-Host $line
+            if ($a.plan -eq 'Claude app' -and $a.limits.Count -eq 0) {
+                Write-Host '    Only the Claude desktop app is signed in, so Claude has no usage numbers yet.' -ForegroundColor Yellow
+                Write-Host '    To add them: run  irm https://claude.ai/install.ps1 | iex  then open a new PowerShell,' -ForegroundColor Yellow
+                Write-Host '    type  claude  and sign in. Numbers show up within 10 minutes; no need to run this again.' -ForegroundColor Yellow
+            }
         }
     }
 }
