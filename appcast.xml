@@ -3,6 +3,24 @@
     <channel>
         <title>Bagel Meter</title>
         <item>
+            <title>1.4</title>
+            <pubDate>Mon, 05 Oct 2026 20:38:03 -0400</pubDate>
+            <sparkle:version>8</sparkle:version>
+            <sparkle:shortVersionString>1.4</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
+            <description sparkle:format="markdown"><![CDATA[# Bagel Meter 1.4
+
+- New **Grouped** view: all your accounts in one list, sorted into Ready (most room first), On credits, and Zeroed (soonest back first). One line per account.
+- The Compact checkbox is now a **View** menu at the bottom: Regular, Compact or Grouped. Your choice is saved on your Mac, so everyone picks their own.
+]]></description>
+            <enclosure url="https://ericbaltimoresound.github.io/bagel-meter-updates/BagelMeter-1.4.zip" length="2233200" type="application/octet-stream" sparkle:edSignature="Eqh6d3E8kMRrhqYxYOpmO+Zd1nEQcJUs1U66oHSNaxdD2smxPRFruVqA8eR+MsDgq9OsgZGAckYJQsGY76OkBw=="/>
+            <sparkle:deltas>
+                <enclosure url="https://ericbaltimoresound.github.io/bagel-meter-updates/Bagel%20Meter8-7.delta" sparkle:deltaFrom="7" length="257722" type="application/octet-stream" sparkle:deltaFromSparkleExecutableSize="977808" sparkle:deltaFromSparkleLocales="de,he,ar,el,ja,fa,uk" sparkle:edSignature="UEfaU92zdR9lKP/nH5nT56XWxGSaSb41L6hF9JZZUWG1Kv/sNJMjXYvIJ0+RCIOFsAvilvHmMbBgxbye4Pq5Bw=="/>
+                <enclosure url="https://ericbaltimoresound.github.io/bagel-meter-updates/Bagel%20Meter8-6.delta" sparkle:deltaFrom="6" length="325954" type="application/octet-stream" sparkle:deltaFromSparkleExecutableSize="977808" sparkle:deltaFromSparkleLocales="de,he,ar,el,ja,fa,uk" sparkle:edSignature="mAftfPxpyYTo0BKddvU4Wm/jQS7ymW5J97hxgjgG3fjjMtptcUfwADKQyKiZpKqs/FQOO7X1OK+Xp4rK8iedAA=="/>
+                <enclosure url="https://ericbaltimoresound.github.io/bagel-meter-updates/Bagel%20Meter8-5.delta" sparkle:deltaFrom="5" length="338778" type="application/octet-stream" sparkle:deltaFromSparkleExecutableSize="977808" sparkle:deltaFromSparkleLocales="de,he,ar,el,ja,fa,uk" sparkle:edSignature="wcpWdoCAjmXzYEWKIdvkiPaB/7kx/rVg1DWVu5wIfY73so3pwi0GD2lsVIv2/T8BfgwdmxZ9MZGr87N1G+27BQ=="/>
+            </sparkle:deltas>
+        </item>
+        <item>
             <title>1.3.4</title>
             <pubDate>Mon, 05 Oct 2026 18:53:04 -0400</pubDate>
             <sparkle:version>7</sparkle:version>
@@ -38,23 +56,6 @@
                 <enclosure url="https://ericbaltimoresound.github.io/bagel-meter-updates/Bagel%20Meter6-5.delta" sparkle:deltaFrom="5" length="142454" type="application/octet-stream" sparkle:deltaFromSparkleExecutableSize="977808" sparkle:deltaFromSparkleLocales="de,he,ar,el,ja,fa,uk" sparkle:edSignature="pt+BC3J2NxMIeMf9580vGXLG3Rsv64JcAUT/IKdZzxbhnnF+GZC5s2uZUfNz3CC+9ySma6jdr3kUjsoMyWSBAA=="/>
                 <enclosure url="https://ericbaltimoresound.github.io/bagel-meter-updates/Bagel%20Meter6-4.delta" sparkle:deltaFrom="4" length="179942" type="application/octet-stream" sparkle:deltaFromSparkleExecutableSize="977808" sparkle:deltaFromSparkleLocales="de,he,ar,el,ja,fa,uk" sparkle:edSignature="/ZAxhX/8t3sD2AI4r6rpc94au/oEsBxcrfuIDpDvtW8/AY/f9nBvWiNdexXP+LCDeHiPMynyM/+zqq85fQcjCw=="/>
                 <enclosure url="https://ericbaltimoresound.github.io/bagel-meter-updates/Bagel%20Meter6-3.delta" sparkle:deltaFrom="3" length="371778" type="application/octet-stream" sparkle:deltaFromSparkleExecutableSize="977808" sparkle:deltaFromSparkleLocales="de,he,ar,el,ja,fa,uk" sparkle:edSignature="lrWyPzLcKrW66uZuMArKDPlB9kfhWCiY2s2lxY/wuOYlarE0vWdda/qmRECH82Ynzc2w3eWTo5KUoa//u5tNCQ=="/>
-            </sparkle:deltas>
-        </item>
-        <item>
-            <title>1.3.1</title>
-            <pubDate>Mon, 05 Oct 2026 18:06:55 -0400</pubDate>
-            <sparkle:version>5</sparkle:version>
-            <sparkle:shortVersionString>1.3.1</sparkle:shortVersionString>
-            <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
-            <description sparkle:format="markdown"><![CDATA[# Bagel Meter 1.3.1
-
-- In Compact, the right-hand column now always shows when each account resets ("Resets Sat 9:00 AM"), or "Back …" in red when it's zeroed. Same for your friends' tables.
-- Files inside the app are readable for everyone on the Mac (cleaner updates).
-]]></description>
-            <enclosure url="https://ericbaltimoresound.github.io/bagel-meter-updates/BagelMeter-1.3.1.zip" length="2135047" type="application/octet-stream" sparkle:edSignature="J5Ht8doV0qzi8ze5UhG5GqjSPK8f41gxLFzK6Ur0W7gKk5r8KkREZTlYR9VbAkviV0Y3oBEFxHcaAPc6Wkh0AA=="/>
-            <sparkle:deltas>
-                <enclosure url="https://ericbaltimoresound.github.io/bagel-meter-updates/Bagel%20Meter5-4.delta" sparkle:deltaFrom="4" length="136222" type="application/octet-stream" sparkle:deltaFromSparkleExecutableSize="977808" sparkle:deltaFromSparkleLocales="de,he,ar,el,ja,fa,uk" sparkle:edSignature="g3X58lTjglZ+qltzA5Qp1giLkq/Jjea63+hwI8udh5QleT8fSR19qrbQGeVclOFw/qRRNOKHGiAw/nVMoYZvCw=="/>
-                <enclosure url="https://ericbaltimoresound.github.io/bagel-meter-updates/Bagel%20Meter5-3.delta" sparkle:deltaFrom="3" length="369574" type="application/octet-stream" sparkle:deltaFromSparkleExecutableSize="977808" sparkle:deltaFromSparkleLocales="de,he,ar,el,ja,fa,uk" sparkle:edSignature="sbhdU9+lRxHftc/w+CUIQ7vHteiW3lgipFVH3vOmYtQ3hQt6ehKw1LRkoNumHl/oOZvUEIQxC6M5APLPX9TYDQ=="/>
             </sparkle:deltas>
         </item>
     </channel>
