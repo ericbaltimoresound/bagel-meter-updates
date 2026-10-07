@@ -3,6 +3,23 @@
     <channel>
         <title>Bagel Meter</title>
         <item>
+            <title>1.5.4</title>
+            <pubDate>Tue, 06 Oct 2026 20:58:45 -0400</pubDate>
+            <sparkle:version>13</sparkle:version>
+            <sparkle:shortVersionString>1.5.4</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
+            <description sparkle:format="markdown"><![CDATA[# Bagel Meter 1.5.4
+
+- Shows the $250 bonus credit for cloud sessions (Claude Code on the web) on Claude accounts that have claimed it, e.g. "$250 cloud credit".
+]]></description>
+            <enclosure url="https://ericbaltimoresound.github.io/bagel-meter-updates/BagelMeter-1.5.4.zip" length="2398460" type="application/octet-stream" sparkle:edSignature="y+E6xBLsGqsKcirOevGGMiERCBU5XOkRkkp1KfzYK27WzHD14spm8pQlnYa3OISN2iAvfboqHa9ivZUVtZW2BA=="/>
+            <sparkle:deltas>
+                <enclosure url="https://ericbaltimoresound.github.io/bagel-meter-updates/Bagel%20Meter13-12.delta" sparkle:deltaFrom="12" length="116438" type="application/octet-stream" sparkle:deltaFromSparkleExecutableSize="977808" sparkle:deltaFromSparkleLocales="de,he,ar,el,ja,fa,uk" sparkle:edSignature="t8ysoDaUL8DyAUJBQxbmWWHoLQKi6fbrCRd86DsmDXDVbPpxOsNbMtZvc6o+7ykvS/z+hEabtA8wfHsBKa13Ag=="/>
+                <enclosure url="https://ericbaltimoresound.github.io/bagel-meter-updates/Bagel%20Meter13-11.delta" sparkle:deltaFrom="11" length="231950" type="application/octet-stream" sparkle:deltaFromSparkleExecutableSize="977808" sparkle:deltaFromSparkleLocales="de,he,ar,el,ja,fa,uk" sparkle:edSignature="ms0gKMvXACU96vbFUzBJaz1kaNdVu9GEdCPgoM1mhCIIvmkznnF9Gqv6aS4/YANmTaqBOAIHzlY/Fh0rFXtmBg=="/>
+                <enclosure url="https://ericbaltimoresound.github.io/bagel-meter-updates/Bagel%20Meter13-10.delta" sparkle:deltaFrom="10" length="376142" type="application/octet-stream" sparkle:deltaFromSparkleExecutableSize="977808" sparkle:deltaFromSparkleLocales="de,he,ar,el,ja,fa,uk" sparkle:edSignature="/Re70KjIzYS+3Ttf1MHTRzzdazdAy2z0sAWM+ytjaXakMPixADzeg944m6R71alDnj3aySHGUAyemnc0l8PlDA=="/>
+            </sparkle:deltas>
+        </item>
+        <item>
             <title>1.5.3</title>
             <pubDate>Tue, 06 Oct 2026 15:37:25 -0400</pubDate>
             <sparkle:version>12</sparkle:version>
@@ -38,24 +55,6 @@
                 <enclosure url="https://ericbaltimoresound.github.io/bagel-meter-updates/Bagel%20Meter11-10.delta" sparkle:deltaFrom="10" length="335210" type="application/octet-stream" sparkle:deltaFromSparkleExecutableSize="977808" sparkle:deltaFromSparkleLocales="de,he,ar,el,ja,fa,uk" sparkle:edSignature="uHP1Dhh5m481z3MUakfPAkGghnLlF3z7GFp3xUsr7tin88lfFVQeKiu3yCrNhQ0M9v14RIoh7VHVOF0GVrnHDQ=="/>
                 <enclosure url="https://ericbaltimoresound.github.io/bagel-meter-updates/Bagel%20Meter11-9.delta" sparkle:deltaFrom="9" length="345690" type="application/octet-stream" sparkle:deltaFromSparkleExecutableSize="977808" sparkle:deltaFromSparkleLocales="de,he,ar,el,ja,fa,uk" sparkle:edSignature="NnWF5pUo/mbz7mOuJ6Rs+dER4FVrGi+ri8wTKUc/ilBO7hcBzEeQwAy+wpUKikJjEB2AmgwKnnQLHc1q5PUzDg=="/>
                 <enclosure url="https://ericbaltimoresound.github.io/bagel-meter-updates/Bagel%20Meter11-8.delta" sparkle:deltaFrom="8" length="411526" type="application/octet-stream" sparkle:deltaFromSparkleExecutableSize="977808" sparkle:deltaFromSparkleLocales="de,he,ar,el,ja,fa,uk" sparkle:edSignature="yDLWpAHkWM6tav2O/3eNGO1D4opdyHpTpQ5uGZjmi8WTCZ1/WjbW5yNcabxIwjFeAO6AC66C94Itq2X6Kx1kBA=="/>
-            </sparkle:deltas>
-        </item>
-        <item>
-            <title>1.5.1</title>
-            <pubDate>Tue, 06 Oct 2026 12:51:17 -0400</pubDate>
-            <sparkle:version>10</sparkle:version>
-            <sparkle:shortVersionString>1.5.1</sparkle:shortVersionString>
-            <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
-            <description sparkle:format="markdown"><![CDATA[# Bagel Meter 1.5.1
-
-- Friends and computers that only have the Claude desktop app signed in now say so ("No numbers: Claude app only") instead of showing a blank. Signing in to Claude Code on that computer adds the numbers.
-- Windows helper: says the same during setup, with the one line to install Claude Code.
-]]></description>
-            <enclosure url="https://ericbaltimoresound.github.io/bagel-meter-updates/BagelMeter-1.5.1.zip" length="2294401" type="application/octet-stream" sparkle:edSignature="5doYav7PtZMygAiOL/mhqb80Lg+9rIwgFZtRCi/71oTMeLIFnifWFQd+ZqHprC7UEw8SxoiFuFk9/Tg78fttCA=="/>
-            <sparkle:deltas>
-                <enclosure url="https://ericbaltimoresound.github.io/bagel-meter-updates/Bagel%20Meter10-9.delta" sparkle:deltaFrom="9" length="135098" type="application/octet-stream" sparkle:deltaFromSparkleExecutableSize="977808" sparkle:deltaFromSparkleLocales="de,he,ar,el,ja,fa,uk" sparkle:edSignature="bizBtjaCu3wh+p/gDzhdMnCk5/i9D/SIG8JHCO4xg/pHowPY8GcBlwboo3bMsFSiayB0iUuQgiLMyx5Zu+4lBg=="/>
-                <enclosure url="https://ericbaltimoresound.github.io/bagel-meter-updates/Bagel%20Meter10-8.delta" sparkle:deltaFrom="8" length="267986" type="application/octet-stream" sparkle:deltaFromSparkleExecutableSize="977808" sparkle:deltaFromSparkleLocales="de,he,ar,el,ja,fa,uk" sparkle:edSignature="STfmpBuXJWtCF57pTqkVCM2yyFAKWVjxd81T65lURukF1dcTxUDYbavt8QfCscpSLlwQwnd02XiZfsMvKj+LCQ=="/>
-                <enclosure url="https://ericbaltimoresound.github.io/bagel-meter-updates/Bagel%20Meter10-7.delta" sparkle:deltaFrom="7" length="345594" type="application/octet-stream" sparkle:deltaFromSparkleExecutableSize="977808" sparkle:deltaFromSparkleLocales="de,he,ar,el,ja,fa,uk" sparkle:edSignature="bFRCPt7BuNWdnvcwQ9uLT5DHyb1AopGpy4guj4/scOFv5nx5t0GLbJzcJN/C0A/zy9h3ji0Nksbwq0eh6JntAg=="/>
             </sparkle:deltas>
         </item>
     </channel>
