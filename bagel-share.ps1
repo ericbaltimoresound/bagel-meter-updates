@@ -112,6 +112,7 @@ function Get-JwtClaims([string]$token) {
 
 function Get-Prop($object, [string]$name) {
     if ($null -eq $object) { return $null }
+    if ($object -is [System.Collections.IDictionary]) { return $object[$name] }
     $p = $object.PSObject.Properties[$name]
     if ($p) { return $p.Value } else { return $null }
 }
@@ -143,6 +144,12 @@ function Is-Running([string]$name) {
     return [bool]$found
 }
 
+function Valid-Usage($value) {
+    if ($null -eq $value -or $value -is [bool]) { return $false }
+    $number = 0.0
+    return [double]::TryParse([string]$value, [Globalization.NumberStyles]::Float, [Globalization.CultureInfo]::InvariantCulture, [ref]$number) -and -not [double]::IsNaN($number) -and -not [double]::IsInfinity($number) -and $number -ge 0 -and $number -le 100
+}
+
 # ---------- usage parsing (same rules as the Mac app) ----------
 
 function Parse-ClaudeLimits($body) {
@@ -160,8 +167,8 @@ function Parse-ClaudeLimits($body) {
                 'weekly_scoped' { if ($scopeName) { $label = '7-day ' + $scopeName } else { $label = '7-day model' } }
                 default         { $label = $kind.Replace('_', ' ') }
             }
-            $used = Get-Prop $item 'percent'; if ($null -eq $used) { $used = 0 }
-            [void]$out.Add([ordered]@{ label = $label; used = [double]$used; resetsAt = (To-Epoch (Get-Prop $item 'resets_at')); wide = ($kind -ne 'weekly_scoped') })
+            $used = Get-Prop $item 'percent'; if (-not (Valid-Usage $used)) { throw 'Usage response has a missing or invalid percentage' }
+            [void]$out.Add([ordered]@{ label = $label; used = [double]$used; resetsAt = (To-Epoch (Get-Prop $item 'resets_at')); wide = ($kind -eq 'session' -or $kind -eq 'weekly_all') })
         }
         return ,$out
     }
@@ -169,7 +176,7 @@ function Parse-ClaudeLimits($body) {
     foreach ($o in $older) {
         $w = Get-Prop $body $o[0]
         if ($w) {
-            $used = Get-Prop $w 'utilization'; if ($null -eq $used) { $used = 0 }
+            $used = Get-Prop $w 'utilization'; if (-not (Valid-Usage $used)) { throw 'Usage response has a missing or invalid percentage' }
             [void]$out.Add([ordered]@{ label = $o[1]; used = [double]$used; resetsAt = (To-Epoch (Get-Prop $w 'resets_at')); wide = $o[2] })
         }
     }
@@ -198,7 +205,7 @@ function Parse-CodexLimits($body) {
                 $after = Get-Prop $w 'reset_after_seconds'
                 if ($null -ne $after) { $reset = (Now-Seconds) + [double]$after }
             }
-            $used = Get-Prop $w 'used_percent'; if ($null -eq $used) { $used = 0 }
+            $used = Get-Prop $w 'used_percent'; if (-not (Valid-Usage $used)) { throw 'Usage response has a missing or invalid percentage' }
             if ($null -ne $reset) { $reset = [double]$reset }
             [void]$out.Add([ordered]@{ label = $name; used = [double]$used; resetsAt = $reset; wide = $group[2] })
         }
@@ -211,15 +218,15 @@ function Parse-CodexLimits($body) {
 # Which account Claude Code on this PC is signed in as. The command-line tool keeps it in
 # %USERPROFILE%\.claude.json, the Claude desktop app in .claude\.claude.json; an old copy of
 # one can linger after switching accounts, so the most recently changed file wins.
-function Get-ClaudeEmail([string]$dir) {
+function Get-ClaudeIdentity([string]$dir) {
     $files = @((Join-Path $dir '.claude.json'))
     if ($dir -eq (Join-Path $HomeDir '.claude')) { $files += (Join-Path $HomeDir '.claude.json') }
     $best = $null; $bestTime = [DateTime]::MinValue
     foreach ($f in $files) {
         if (-not (Test-Path $f)) { continue }
-        $email = Get-Prop (Get-Prop (Read-JsonFile $f) 'oauthAccount') 'emailAddress'
+        $identity = Get-Prop (Read-JsonFile $f) 'oauthAccount'
         $time = (Get-Item -Force $f).LastWriteTimeUtc
-        if ($email -and $time -gt $bestTime) { $best = $email; $bestTime = $time }
+        if ($identity -and $time -gt $bestTime) { $best = $identity; $bestTime = $time }
     }
     return $best
 }
@@ -231,20 +238,23 @@ function Get-ClaudeAccount([string]$dir) {
     if (-not $oauth -or -not (Get-Prop $oauth 'accessToken')) {
         # Signed in only through the Claude desktop app. Its login can't (and shouldn't) be read,
         # but which account it is and when it was last used here can, so My devices still shows it.
-        $email = Get-ClaudeEmail $dir
+        $email = Get-Prop (Get-ClaudeIdentity $dir) 'emailAddress'
         if ($email -or (Last-Used $dir 'projects')) {
-            return [ordered]@{ plan = 'Claude app'; error = $null; limits = (New-Object System.Collections.ArrayList); email = $email }
+            return [ordered]@{ plan = 'Claude app'; error = 'Usage unknown: sign in to Claude Code on this PC to share numbers'; accountID = $null; fetchedAt = $null; lastAttemptAt = (Now-Seconds); needsSignIn = $true; limits = (New-Object System.Collections.ArrayList); email = $email }
         }
         return $null
     }
-    $result = [ordered]@{ plan = (Pretty-Plan (Get-Prop $oauth 'subscriptionType')); error = $null; limits = (New-Object System.Collections.ArrayList); email = $null }
-    $result.email = Get-ClaudeEmail $dir
+    $result = [ordered]@{ plan = (Pretty-Plan (Get-Prop $oauth 'subscriptionType')); error = $null; limits = (New-Object System.Collections.ArrayList); email = $null; accountID = $null; fetchedAt = $null; lastAttemptAt = (Now-Seconds); needsSignIn = $false }
+    $identity = Get-ClaudeIdentity $dir
+    $result.email = Get-Prop $identity 'emailAddress'
+    $result.accountID = Get-Prop $identity 'accountUuid'
+    if ($result.accountID -and (Get-Prop $identity 'organizationUuid')) { $result.accountID += ':' + $identity.organizationUuid }
 
     $expires = [double](Get-Prop $oauth 'expiresAt')
     $nowMs = (Now-Seconds) * 1000
     if ($expires -lt $nowMs + 300000) {
         if (Is-Running 'claude') {
-            if ($expires -lt $nowMs) { $result.error = 'Claude Code is open; waiting for it to refresh'; return $result }
+            if ($expires -lt $nowMs) { $result.error = 'Claude sign-in expired. Finish signing in or restart Claude Code'; $result.needsSignIn = $true; return $result }
         } else {
             # Renew the same way Claude Code does, and save it back for Claude Code to use.
             $body = @{ grant_type = 'refresh_token'; refresh_token = (Get-Prop $oauth 'refreshToken'); client_id = '9d1c250a-e61b-44d9-88ed-5944d1962f5e' }
@@ -253,7 +263,7 @@ function Get-ClaudeAccount([string]$dir) {
             try {
                 $r = Post-Json 'https://platform.claude.com/v1/oauth/token' $body
             } catch {
-                $result.error = 'Signed out. Open Claude Code and run /login'; return $result
+                $result.error = 'Signed out. Open Claude Code and run /login'; $result.needsSignIn = $true; return $result
             }
             $oauth.accessToken = $r.access_token
             if ($r.refresh_token) { $oauth.refreshToken = $r.refresh_token }
@@ -267,8 +277,11 @@ function Get-ClaudeAccount([string]$dir) {
         $headers = @{ Authorization = 'Bearer ' + $oauth.accessToken; 'anthropic-beta' = 'oauth-2025-04-20' }
         $usage = Invoke-RestMethod -UseBasicParsing -Uri 'https://api.anthropic.com/api/oauth/usage' -Headers $headers -TimeoutSec 30
         $result.limits = Parse-ClaudeLimits $usage
+        Set-UsageObservation $result
     } catch {
         $result.error = 'Usage check failed'
+        $status = Get-Prop (Get-Prop $_.Exception 'Response') 'StatusCode'
+        if ($status -and [int]$status -eq 401) { $result.needsSignIn = $true; $result.error = 'Sign-in expired; sign in on this PC' }
     }
     return $result
 }
@@ -278,19 +291,21 @@ function Get-CodexAccount([string]$dir) {
     $auth = Read-JsonFile $file
     $tokens = Get-Prop $auth 'tokens'
     if (-not $tokens -or -not (Get-Prop $tokens 'access_token')) { return $null }
-    $result = [ordered]@{ plan = $null; error = $null; limits = (New-Object System.Collections.ArrayList); email = $null }
+    $result = [ordered]@{ plan = $null; error = $null; limits = (New-Object System.Collections.ArrayList); email = $null; accountID = $null; fetchedAt = $null; lastAttemptAt = (Now-Seconds); needsSignIn = $false }
     $result.email = Get-Prop (Get-JwtClaims (Get-Prop $tokens 'id_token')) 'email'
+    $result.accountID = Get-Prop $tokens 'account_id'
+    if (-not $result.accountID) { $result.accountID = Get-Prop (Get-Prop (Get-JwtClaims $tokens.access_token) 'https://api.openai.com/auth') 'chatgpt_account_id' }
 
     $exp = Get-Prop (Get-JwtClaims $tokens.access_token) 'exp'
     if ($exp -and [double]$exp -lt (Now-Seconds) + 300) {
         if (Is-Running 'codex') {
-            if ([double]$exp -lt (Now-Seconds)) { $result.error = 'Codex is open; waiting for it to refresh'; return $result }
+            if ([double]$exp -lt (Now-Seconds)) { $result.error = 'Codex sign-in expired. Finish signing in or restart Codex'; $result.needsSignIn = $true; return $result }
         } else {
             $body = @{ client_id = 'app_EMoamEEZ73f0CkXaXp7hrann'; grant_type = 'refresh_token'; refresh_token = $tokens.refresh_token; scope = 'openid profile email' }
             try {
                 $r = Post-Json 'https://auth.openai.com/oauth/token' $body
             } catch {
-                $result.error = 'Signed out. Run: codex login'; return $result
+                $result.error = 'Signed out. Run: codex login'; $result.needsSignIn = $true; return $result
             }
             $tokens.access_token = $r.access_token
             if ($r.id_token) { $tokens.id_token = $r.id_token }
@@ -307,10 +322,37 @@ function Get-CodexAccount([string]$dir) {
         $result.plan = Pretty-Plan (Get-Prop $usage 'plan_type')
         if (-not $result.email) { $result.email = Get-Prop $usage 'email' }
         $result.limits = Parse-CodexLimits $usage
+        if (-not $result.accountID) { $result.accountID = Get-Prop $usage 'account_id' }
+        Set-UsageObservation $result
     } catch {
         $result.error = 'Usage check failed'
+        $status = Get-Prop (Get-Prop $_.Exception 'Response') 'StatusCode'
+        if ($status -and [int]$status -eq 401) { $result.needsSignIn = $true; $result.error = 'Sign-in expired; sign in on this PC' }
     }
     return $result
+}
+
+# HTTP success without usable account-wide numbers is not a successful observation.
+function Set-UsageObservation($result) {
+    if (@($result.limits | Where-Object { $_.wide }).Count -gt 0) {
+        $result.fetchedAt = Now-Seconds
+    } else {
+        $result.error = 'Usage numbers unavailable'
+    }
+}
+
+# Legacy readers must not see expired numbers as current.
+function Protect-Observation($account, [double]$now) {
+    $fetched = Get-Prop $account 'fetchedAt'
+    $valid = $null -ne $fetched -and [double]$fetched -gt 0 -and
+        $now - [double]$fetched -le 720 -and [double]$fetched - $now -le 60 -and
+        -not [double]::IsNaN([double]$fetched) -and -not [double]::IsInfinity([double]$fetched)
+    if (-not $valid -or $account.error -or $account.needsSignIn) {
+        $account.limits = @()
+        $account.extras = @()
+        $account.creditsLeft = $null
+        if (-not $account.error) { $account.error = 'Usage unknown or out of date; refresh on the source computer' }
+    }
 }
 
 function Get-AccountFolders([string]$stem) {
@@ -345,7 +387,7 @@ function Build-Snapshot([string]$name, [bool]$hideEmails) {
         if ($null -eq $a) { continue }
         $n++
         $email = $a.email; if ($hideEmails) { $email = $null }
-        [void]$accounts.Add([ordered]@{ id = 'win-claude-' + (Split-Path $dir -Leaf); provider = 'claude'; title = 'Claude ' + $n; plan = $a.plan; error = $a.error; limits = $a.limits; email = $email; openNow = $claudeOpen; lastUsed = (Last-Used $dir 'projects') })
+        [void]$accounts.Add([ordered]@{ id = 'win-claude-' + (Split-Path $dir -Leaf); provider = 'claude'; title = 'Claude ' + $n; plan = $a.plan; error = $a.error; limits = $a.limits; accountID = $a.accountID; fetchedAt = $a.fetchedAt; lastAttemptAt = $a.lastAttemptAt; needsSignIn = $a.needsSignIn; email = $email; openNow = ($claudeOpen -and -not $a.needsSignIn); lastUsed = (Last-Used $dir 'projects') })
     }
     $codexDirs = Get-AccountFolders '.codex'
     $codexOpen = $null; if ($codexDirs.Count -eq 1) { $codexOpen = [bool](Is-Running 'codex') }
@@ -355,8 +397,9 @@ function Build-Snapshot([string]$name, [bool]$hideEmails) {
         if ($null -eq $a) { continue }
         $n++
         $email = $a.email; if ($hideEmails) { $email = $null }
-        [void]$accounts.Add([ordered]@{ id = 'win-codex-' + (Split-Path $dir -Leaf); provider = 'codex'; title = 'Codex ' + $n; plan = $a.plan; error = $a.error; limits = $a.limits; email = $email; openNow = $codexOpen; lastUsed = (Last-Used $dir 'sessions') })
+        [void]$accounts.Add([ordered]@{ id = 'win-codex-' + (Split-Path $dir -Leaf); provider = 'codex'; title = 'Codex ' + $n; plan = $a.plan; error = $a.error; limits = $a.limits; accountID = $a.accountID; fetchedAt = $a.fetchedAt; lastAttemptAt = $a.lastAttemptAt; needsSignIn = $a.needsSignIn; email = $email; openNow = ($codexOpen -and -not $a.needsSignIn); lastUsed = (Last-Used $dir 'sessions') })
     }
+    foreach ($a in $accounts) { Protect-Observation $a (Now-Seconds) }
     return [ordered]@{ v = 1; name = $name; sentAt = 0; accounts = $accounts }
 }
 
@@ -381,6 +424,7 @@ function Send-Usage([switch]$Force, [switch]$Loud) {
     $changed = (-not $last) -or ($last.fingerprint -ne $fingerprint)
     if (-not $Force -and -not (($changed -and $age -ge 600) -or $age -ge 3600)) { return }
 
+    foreach ($a in $snap.accounts) { Protect-Observation $a (Now-Seconds) }
     $snap.sentAt = Now-Seconds
     $payload = Protect-Text $invite.Key ($snap | ConvertTo-Json -Depth 10 -Compress)
     Invoke-WebRequest -UseBasicParsing -Method Post -Uri ('https://ntfy.sh/' + $invite.Topic) -Body $payload -TimeoutSec 30 | Out-Null
