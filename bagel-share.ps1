@@ -276,6 +276,11 @@ function Get-ClaudeAccount([string]$dir) {
     try {
         $headers = @{ Authorization = 'Bearer ' + $oauth.accessToken; 'anthropic-beta' = 'oauth-2025-04-20' }
         $usage = Invoke-RestMethod -UseBasicParsing -Uri 'https://api.anthropic.com/api/oauth/usage' -Headers $headers -TimeoutSec 30
+        $profile = Invoke-RestMethod -UseBasicParsing -Uri 'https://api.anthropic.com/api/oauth/profile' -Headers $headers -TimeoutSec 30
+        $verified = Get-Prop $profile 'account'; $workspace = Get-Prop (Get-Prop $profile 'organization') 'uuid'
+        if (-not (Get-Prop $verified 'uuid') -or -not (Get-Prop $verified 'email') -or -not $workspace) { throw 'Claude identity was not verified' }
+        $result.email = $verified.email
+        $result.accountID = $verified.uuid + ':' + $workspace
         $result.limits = Parse-ClaudeLimits $usage
         Set-UsageObservation $result
     } catch {

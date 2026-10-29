@@ -3,6 +3,25 @@
     <channel>
         <title>Bagel Meter</title>
         <item>
+            <title>1.7.2</title>
+            <pubDate>Thu, 29 Oct 2026 17:31:17 -0400</pubDate>
+            <sparkle:version>18</sparkle:version>
+            <sparkle:shortVersionString>1.7.2</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
+            <description sparkle:format="markdown"><![CDATA[# Verified Claude account names
+
+Bagel Meter now checks Claude's signed-in identity directly before showing or sharing usage. An old account name in Claude's settings can no longer label another account's numbers. If the saved profile and active login disagree, the app names the mismatch and asks you to reconnect. Existing profiles, history and logins are preserved.
+
+The Windows helper also verifies Claude account identity before sharing a reading.
+]]></description>
+            <enclosure url="https://ericbaltimoresound.github.io/bagel-meter-updates/BagelMeter-1.7.2.zip" length="2860272" type="application/octet-stream" sparkle:edSignature="OtsCJ/TzWWfEzfzzq9x5DqkDDsFWf6tWM7dYE3BKSX3OJ6jzu8IjZcsy/h/ZTJ+hO7Ygru6rvI2dVzbWw/E6Bg=="/>
+            <sparkle:deltas>
+                <enclosure url="https://ericbaltimoresound.github.io/bagel-meter-updates/Bagel%20Meter18-17.delta" sparkle:deltaFrom="17" length="213930" type="application/octet-stream" sparkle:deltaFromSparkleExecutableSize="977808" sparkle:deltaFromSparkleLocales="de,he,ar,el,ja,fa,uk" sparkle:edSignature="S1aGax6abdP712teYc6Z9oAuqBtSwJRi/Cj0SRrBz/UOgIWlOm86Ma1UJknxSthcQNw3ov8Sr1RquqXd8JkpCQ=="/>
+                <enclosure url="https://ericbaltimoresound.github.io/bagel-meter-updates/Bagel%20Meter18-15.delta" sparkle:deltaFrom="15" length="643390" type="application/octet-stream" sparkle:deltaFromSparkleExecutableSize="977808" sparkle:deltaFromSparkleLocales="de,he,ar,el,ja,fa,uk" sparkle:edSignature="KOEh44J2MAeSyZ4IbbztZkWLhxoKHcvpYHH/I1SVvvHoSkHI/aHbXowXwEiBUy+tFLJOXtcSkVr172V+1y42Cg=="/>
+                <enclosure url="https://ericbaltimoresound.github.io/bagel-meter-updates/Bagel%20Meter18-14.delta" sparkle:deltaFrom="14" length="706974" type="application/octet-stream" sparkle:deltaFromSparkleExecutableSize="977808" sparkle:deltaFromSparkleLocales="de,he,ar,el,ja,fa,uk" sparkle:edSignature="aNSXS+yhzLJNuxEB21axkR6Gmm2XDzGaVSKUMEiARMT/xkSTM3TD1b4TkiDMAMgELhLUmwsYmjN9zTWsdvatAA=="/>
+            </sparkle:deltas>
+        </item>
+        <item>
             <title>1.7.1</title>
             <pubDate>Thu, 29 Oct 2026 17:17:37 -0400</pubDate>
             <sparkle:version>17</sparkle:version>
@@ -40,24 +59,6 @@
                 <enclosure url="https://ericbaltimoresound.github.io/bagel-meter-updates/Bagel%20Meter15-14.delta" sparkle:deltaFrom="14" length="339346" type="application/octet-stream" sparkle:deltaFromSparkleExecutableSize="977808" sparkle:deltaFromSparkleLocales="de,he,ar,el,ja,fa,uk" sparkle:edSignature="JsCMapeam/xItSMV0aVmRNiUVPsLO2UljVxi62LHGLmKmSnUXVqgEKzhu9LDNRarBhl16JaV5EbLUpTeaGyvAQ=="/>
                 <enclosure url="https://ericbaltimoresound.github.io/bagel-meter-updates/Bagel%20Meter15-13.delta" sparkle:deltaFrom="13" length="511802" type="application/octet-stream" sparkle:deltaFromSparkleExecutableSize="977808" sparkle:deltaFromSparkleLocales="de,he,ar,el,ja,fa,uk" sparkle:edSignature="1/iZolNhpjjRILRG1KUKP84k2I5GBoQMZTNqJsuct9s4M9ykKObnKzB15oNuTRb9JnB0VH5veATBFIIkj4L/CQ=="/>
                 <enclosure url="https://ericbaltimoresound.github.io/bagel-meter-updates/Bagel%20Meter15-12.delta" sparkle:deltaFrom="12" length="516986" type="application/octet-stream" sparkle:deltaFromSparkleExecutableSize="977808" sparkle:deltaFromSparkleLocales="de,he,ar,el,ja,fa,uk" sparkle:edSignature="5wGoAriy4vsbyqV9zQimR2YyZa+dbxKPQjXQz8rDPLxPOUg0FyMOVXyvU/hZPseI4DfbAw2Pg45mEqC66AJYBA=="/>
-            </sparkle:deltas>
-        </item>
-        <item>
-            <title>1.6.0</title>
-            <pubDate>Tue, 06 Oct 2026 22:04:09 -0400</pubDate>
-            <sparkle:version>14</sparkle:version>
-            <sparkle:shortVersionString>1.6.0</sparkle:shortVersionString>
-            <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
-            <description sparkle:format="markdown"><![CDATA[# Bagel Meter 1.6.0
-
-- Pace: each account now says where its week is headed, like "Runs out ~Wed 11 PM" or "~40% will go unused", based on how fast it's been used since the last reset.
-- New Jobs tab: pick a GitHub repo, and its open issues labeled "bagel" become jobs. Click Run to have the account with the most spare room work on one right on this Mac (Claude Code or Codex), then a pull request opens. Nothing ever goes to the main branch. Stop and Log are there while it runs. Needs the GitHub CLI signed in (gh auth login).
-]]></description>
-            <enclosure url="https://ericbaltimoresound.github.io/bagel-meter-updates/BagelMeter-1.6.0.zip" length="2598861" type="application/octet-stream" sparkle:edSignature="e2hnE2kQ0YbaniPLzibr8FpRAJwhL86KGLcuqv+dx3AmZ6J5Dfqnl+BrgP9BJy25WxcG2Q1+9F7uOYmMQvvoDA=="/>
-            <sparkle:deltas>
-                <enclosure url="https://ericbaltimoresound.github.io/bagel-meter-updates/Bagel%20Meter14-13.delta" sparkle:deltaFrom="13" length="445138" type="application/octet-stream" sparkle:deltaFromSparkleExecutableSize="977808" sparkle:deltaFromSparkleLocales="de,he,ar,el,ja,fa,uk" sparkle:edSignature="icroR6aPZAYBHcdOTWSp08OqToUXqT4Jmp076Lk2/UKuIjfDgoX/7iapVVvfGV+uzmn4WOgAI7Mgk12xWLbBDQ=="/>
-                <enclosure url="https://ericbaltimoresound.github.io/bagel-meter-updates/Bagel%20Meter14-12.delta" sparkle:deltaFrom="12" length="450030" type="application/octet-stream" sparkle:deltaFromSparkleExecutableSize="977808" sparkle:deltaFromSparkleLocales="de,he,ar,el,ja,fa,uk" sparkle:edSignature="R7JZ1OI8yGjurBYNXL2yYHridPdKWXieOgNtHbulj96fJrIw3sh5xiPOOD/fWBSSNwpQw8osPWtPzUflyPqoDA=="/>
-                <enclosure url="https://ericbaltimoresound.github.io/bagel-meter-updates/Bagel%20Meter14-11.delta" sparkle:deltaFrom="11" length="471030" type="application/octet-stream" sparkle:deltaFromSparkleExecutableSize="977808" sparkle:deltaFromSparkleLocales="de,he,ar,el,ja,fa,uk" sparkle:edSignature="jpbmRnboyO/QkoC8y0FJknbW9lFDQP1uq8R/NR/e2LyMPlP58iLCnFULzBnsJzkqocPQ7PEsGcHAq1lvcnoYAA=="/>
             </sparkle:deltas>
         </item>
     </channel>
